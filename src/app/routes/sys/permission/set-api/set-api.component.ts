@@ -44,7 +44,7 @@ export class SysPermissionSetApiComponent implements OnInit {
   ngOnInit(): void {
     zip(
       this.http.get(`/chen/admin/online/sysApiList`),
-      this.http.get(`/chen/admin/sys/api/permission/${this.record.id}/enabled`),
+      this.http.get(`/chen/admin/sys/api/permission/enabled/${this.record.id}`),
     ).subscribe(([onlineSysUserApiList, sysPermissionApiList]: any[]) => {
 
       const defaultSysApiIdList = sysPermissionApiList.map((value, index, array) => {
