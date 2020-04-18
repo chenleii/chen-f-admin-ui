@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <div class="modal-title">查看 {{ record.username }} 信息</div>
+</div>
+<nz-spin *ngIf="!sysUser" class="modal-spin"></nz-spin>
+<div sv-container col="1" labelWidth="150" *ngIf="sysUser">
+  <sv label="ID">{{ sysUser.id }}</sv>
+  <sv label="用户名称">{{ sysUser.username }}</sv>
+  <sv label="密码">{{sysUser.password}}</sv>
+  <sv label="级别" ><nz-tag [nzColor]="sysUser.level.color">{{sysUser.level.text}}</nz-tag></sv>
+  <sv label="最后登录时间">{{sysUser.lastLoginDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="描述">{{sysUser.remark}}</sv>
+  <sv label="状态" ><nz-tag [nzColor]="sysUser.status.color">{{sysUser.status.text}}</nz-tag></sv>
+  <sv label="修改的日期时间">{{sysUser.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysUser.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

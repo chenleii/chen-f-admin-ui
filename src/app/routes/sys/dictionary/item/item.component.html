@@ -1,0 +1,46 @@
+<!--<page-header >-->
+<!--&lt;!&ndash;  <ng-template #phActionTpl>&ndash;&gt;-->
+<!--    <button (click)="add()" nz-button nzType="primary">新建</button>-->
+<!--&lt;!&ndash;  </ng-template>&ndash;&gt;-->
+<!--</page-header>-->
+<!--<nz-card>-->
+<!--  <sf #sf [formData]="params" [schema]="searchSchema" [ui]="ui" [button]="none" >-->
+<!--    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">-->
+<!--      <nz-col nzMd="24" nzSm="24" style="text-align: right">-->
+<!--        <button nz-button type="submit" nzType="primary" (click)="st.load(1,sf.value)" [nzLoading]="http.loading">搜索</button>-->
+<!--        <button nz-button type="button" (click)="st.reset(); sf.reset();">重置</button>-->
+<!--      </nz-col>-->
+<!--    </nz-row>-->
+<!--  </sf>-->
+<!--  <st #st [data]="url" [columns]="columns" [req]="req" [res]="res" [page]="page"-->
+<!--      [loading]="http.loading"></st>-->
+<!--</nz-card>-->
+
+
+<div class="modal-header">
+  <div class="modal-title">查看 {{ record.id }} 信息</div>
+</div>
+
+  <sf #sf [formData]="params" [schema]="searchSchema" [ui]="ui" [button]="none">
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="24" nzSm="24" style="text-align: right">
+        <button nz-button type="submit" nzType="primary" (click)="st.load(1,sf.value)" [nzLoading]="http.loading">搜索
+        </button>
+        <button nz-button type="button" (click)="st.reset(); sf.reset();">重置</button>
+      </nz-col>
+    </nz-row>
+  </sf>
+<div class="my-md">
+  <button nz-button (click)="add()" [nzType]="'primary'">
+    <i nz-icon nzType="plus"></i>
+    <span>新建</span>
+  </button>
+</div>
+  <st #st [data]="url" [columns]="columns" [req]="req" [res]="res" [page]="page" [ps]="page.pageSizes[0]"
+      [loading]="http.loading"></st>
+
+
+
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

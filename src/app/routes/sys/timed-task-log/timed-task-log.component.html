@@ -1,0 +1,17 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+<!--    <button (click)="add()" nz-button nzType="primary">新建</button>-->
+  </ng-template>
+</page-header>
+<nz-card>
+  <sf #sf [formData]="params" [schema]="searchSchema" [ui]="ui" [button]="none" >
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="24" nzSm="24" style="text-align: right">
+        <button nz-button type="submit" nzType="primary" (click)="st.load(1,sf.value)" [nzLoading]="http.loading">搜索</button>
+        <button nz-button type="button" (click)="st.reset(); sf.reset();">重置</button>
+      </nz-col>
+    </nz-row>
+  </sf>
+  <st #st [data]="url" [columns]="columns" [req]="req" [res]="res" [page]="page"
+      [loading]="http.loading"></st>
+</nz-card>

@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <div class="modal-title">查看 {{ record.id }} 信息</div>
+</div>
+<nz-spin *ngIf="!sysRole" class="modal-spin"></nz-spin>
+<div sv-container col="1" labelWidth="150" *ngIf="sysRole">
+  <sv label="ID">{{ sysRole.id }}</sv>
+  <sv label="编码">{{ sysRole.code }}</sv>
+  <sv label="名称">{{ sysRole.name }}</sv>
+  <sv label="备注">{{sysRole.remark}}</sv>
+  <sv label="状态" ><nz-tag [nzColor]="sysRole.status.color">{{sysRole.status.text}}</nz-tag></sv>
+  <sv label="修改的日期时间">{{sysRole.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysRole.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

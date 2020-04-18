@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <div class="modal-title">查看 {{ record.id }} 信息</div>
+</div>
+<nz-spin *ngIf="!sysDictionaryItem" class="modal-spin"></nz-spin>
+<div sv-container col="1" labelWidth="150" *ngIf="sysDictionaryItem">
+  <sv label="ID">{{ sysDictionaryItem.id }}</sv>
+  <sv label="系统字典ID">{{ sysDictionaryItem.sysDictionaryId }}</sv>
+  <sv label="编码">{{sysDictionaryItem.code}}</sv>
+  <sv label="名称">{{sysDictionaryItem.name}}</sv>
+  <sv label="KEY">{{sysDictionaryItem.key}}</sv>
+  <sv label="值">{{sysDictionaryItem.value}}</sv>
+  <sv label="KEY类型" ><nz-tag [nzColor]="sysDictionaryItem.keyType.color">{{sysDictionaryItem.keyType.text}}</nz-tag></sv>
+  <sv label="值类型" ><nz-tag [nzColor]="sysDictionaryItem.valueType.color">{{sysDictionaryItem.valueType.text}}</nz-tag></sv>
+  <sv label="颜色" ><nz-tag [nzColor]="sysDictionaryItem.color">{{sysDictionaryItem.color}}</nz-tag></sv>
+  <sv label="顺序">{{sysDictionaryItem.order}}</sv>
+  <sv label="描述">{{sysDictionaryItem.remark}}</sv>
+  <sv label="状态" ><nz-tag [nzColor]="sysDictionaryItem.status.color">{{sysDictionaryItem.status.text}}</nz-tag></sv>
+  <sv label="修改的日期时间">{{sysDictionaryItem.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysDictionaryItem.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

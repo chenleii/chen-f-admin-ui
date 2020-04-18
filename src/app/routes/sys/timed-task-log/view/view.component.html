@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <div class="modal-title">查看 {{ record.id }} 信息</div>
+</div>
+<nz-spin *ngIf="!sysTimedTaskLog" class="modal-spin"></nz-spin>
+<div sv-container col="1" labelWidth="150" *ngIf="sysTimedTaskLog">
+  <sv label="ID">{{ sysTimedTaskLog.id }}</sv>
+  <sv label="编码">{{ sysTimedTaskLog.code }}</sv>
+  <sv label="名称">{{ sysTimedTaskLog.name }}</sv>
+  <sv label="类名">{{sysTimedTaskLog.className}}</sv>
+  <sv label="CORN表达式">{{sysTimedTaskLog.cronExpression}}</sv>
+  <sv label="数据(JSON格式)">{{sysTimedTaskLog.data}}</sv>
+  <sv label="类型" ><nz-tag [nzColor]="sysTimedTaskLog.type.color">{{sysTimedTaskLog.type.text}}</nz-tag></sv>
+  <sv label="执行状态" ><nz-tag [nzColor]="sysTimedTaskLog.executionStatus.color">{{sysTimedTaskLog.executionStatus.text}}</nz-tag></sv>
+  <sv label="异常信息">{{sysTimedTaskLog.exceptionMessage}}</sv>
+  <sv label="执行开始日期时间">{{sysTimedTaskLog.executionStartDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="执行结束日期时间">{{sysTimedTaskLog.executionEndDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="执行时间（毫秒）"> {{sysTimedTaskLog.executionTime}}</sv>
+  <sv label="备注">{{sysTimedTaskLog.remark}}</sv>
+<!--  <sv label="状态" ><nz-tag [nzColor]="sysTimedTaskLog.status.color">{{sysTimedTaskLog.status.text}}</nz-tag></sv>-->
+  <sv label="修改的日期时间">{{sysTimedTaskLog.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysTimedTaskLog.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

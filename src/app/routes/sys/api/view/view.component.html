@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <div class="modal-title">查看 {{ record.id }} 信息</div>
+</div>
+<nz-spin *ngIf="!sysApi" class="modal-spin"></nz-spin>
+<div sv-container col="1" labelWidth="150" *ngIf="sysApi">
+  <sv label="ID">{{ sysApi.id }}</sv>
+  <sv label="名称">{{ sysApi.name }}</sv>
+  <sv label="路径">{{ sysApi.url }}</sv>
+  <sv label="HTTP请求方法" ><nz-tag [nzColor]="sysApi.httpMethod.color">{{sysApi.httpMethod.text}}</nz-tag></sv>
+  <sv label="类型" ><nz-tag [nzColor]="sysApi.type.color">{{sysApi.type.text}}</nz-tag></sv>
+  <sv label="备注">{{sysApi.remark}}</sv>
+  <sv label="状态" ><nz-tag [nzColor]="sysApi.status.color">{{sysApi.status.text}}</nz-tag></sv>
+  <sv label="修改的日期时间">{{sysApi.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysApi.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>
