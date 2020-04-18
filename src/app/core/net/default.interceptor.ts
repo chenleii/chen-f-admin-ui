@@ -1,16 +1,16 @@
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
   HttpErrorResponse,
   HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
   HttpResponseBase,
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { mergeMap, catchError } from 'rxjs/operators';
-import { NzMessageService, NzNotificationService } from 'ng-zorro-antd';
+import { catchError, mergeMap } from 'rxjs/operators';
+import { NzNotificationService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
@@ -38,7 +38,8 @@ const CODEMESSAGE = {
  */
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector) {
+  }
 
   private get notification(): NzNotificationService {
     return this.injector.get(NzNotificationService);
@@ -73,7 +74,7 @@ export class DefaultInterceptor implements HttpInterceptor {
         // 则以下代码片断可直接适用
         // if (event instanceof HttpResponse) {
         //     const body: any = event.body;
-        //     if (body && body.status !== 0) {
+        //     if (body && body.status !=== 0) {
         //         this.msg.error(body.msg);
         //         // 继续抛出错误中断后续所有 Pipe、subscribe 操作，因此：
         //         // this.http.get('/').subscribe() 并不会触发
@@ -117,7 +118,12 @@ export class DefaultInterceptor implements HttpInterceptor {
       url = environment.SERVER_URL + url;
     }
 
-    const newReq = req.clone({ url });
+    const newReq = req.clone(
+      {
+        url,
+        withCredentials: true,
+      },
+    );
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {
         // 允许统一对请求错误处理
