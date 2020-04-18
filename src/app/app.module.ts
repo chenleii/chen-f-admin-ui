@@ -1,6 +1,6 @@
 // tslint:disable: no-duplicate-imports
 import { NgModule, LOCALE_ID, APP_INITIALIZER, Injector } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -101,6 +101,10 @@ import { LayoutModule } from './layout/layout.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-XSRF-TOKEN',
+    }),
     DelonModule.forRoot(),
     CoreModule,
     SharedModule,
