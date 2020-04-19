@@ -1,13 +1,18 @@
 <div class="modal-header">
   <div class="modal-title">查看 {{ record.id }} 信息</div>
 </div>
-<nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<div sv-container *ngIf="i">
-  <sv label="姓名">{{ i.owner }}</sv>
-  <sv label="会员卡号">32943898021309809423</sv>
-  <sv label="身份证">3321944288191034921</sv>
-  <sv label="联系方式">18112345678</sv>
-  <sv label="联系地址">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</sv>
+<nz-spin *ngIf="!sysMenu" class="modal-spin"></nz-spin>
+<div sv-container *ngIf="sysMenu" col="1" labelWidth="150" >
+  <sv label="ID">{{ sysMenu.id }}</sv>
+  <sv label="父级ID">{{ sysMenu.parentId }}</sv>
+  <sv label="名称">{{ sysMenu.name }}</sv>
+  <sv label="路径">{{ sysMenu.url }}</sv>
+  <sv label="图标"><i nz-icon [nzType]="sysMenu.icon"></i></sv>
+  <sv label="类型" ><nz-tag [nzColor]="sysMenu.type.color">{{sysMenu.type.text}}</nz-tag></sv>
+  <sv label="备注">{{sysMenu.remark}}</sv>
+  <sv label="状态" ><nz-tag [nzColor]="sysMenu.status.color">{{sysMenu.status.text}}</nz-tag></sv>
+  <sv label="修改的日期时间">{{sysMenu.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysMenu.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
 </div>
 <div class="modal-footer">
   <button nz-button type="button" (click)="close()">关闭</button>

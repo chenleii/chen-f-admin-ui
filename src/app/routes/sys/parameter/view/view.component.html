@@ -1,13 +1,18 @@
 <div class="modal-header">
   <div class="modal-title">查看 {{ record.id }} 信息</div>
 </div>
-<nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<div sv-container *ngIf="i">
-  <sv label="姓名">{{ i.owner }}</sv>
-  <sv label="会员卡号">32943898021309809423</sv>
-  <sv label="身份证">3321944288191034921</sv>
-  <sv label="联系方式">18112345678</sv>
-  <sv label="联系地址">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</sv>
+<nz-spin *ngIf="!sysParameter" class="modal-spin"></nz-spin>
+<div sv-container *ngIf="sysParameter" col="1" labelWidth="150" >
+  <sv label="ID">{{ sysParameter.id }}</sv>
+  <sv label="编码">{{ sysParameter.code }}</sv>
+  <sv label="名称">{{ sysParameter.name }}</sv>
+  <sv label="值">{{ sysParameter.value }}</sv>
+  <sv label="值类型"><nz-tag [nzColor]="sysParameter.valueType.color">{{sysParameter.valueType.text}}</nz-tag></sv>
+  <sv label="类型" ><nz-tag [nzColor]="sysParameter.type.color">{{sysParameter.type.text}}</nz-tag></sv>
+  <sv label="备注">{{sysParameter.remark}}</sv>
+  <sv label="状态" ><nz-tag [nzColor]="sysParameter.status.color">{{sysParameter.status.text}}</nz-tag></sv>
+  <sv label="修改的日期时间">{{sysParameter.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysParameter.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
 </div>
 <div class="modal-footer">
   <button nz-button type="button" (click)="close()">关闭</button>
