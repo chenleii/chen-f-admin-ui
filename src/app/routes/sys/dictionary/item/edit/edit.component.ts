@@ -21,6 +21,7 @@ export class SysDictionaryItemEditComponent implements OnInit {
       name: { type: 'string', title: '名称', readOnly: true },
       key: { type: 'string', title: 'KEY' },
       value: { type: 'string', title: '值' },
+      valueI18n: { type: 'string', title: '值的国际化' },
       keyType: {
         type: 'string', title: 'KEY类型',
         enum: [],

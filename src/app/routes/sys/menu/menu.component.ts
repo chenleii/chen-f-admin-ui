@@ -105,6 +105,7 @@ export class SysMenuComponent implements OnInit {
     { title: 'ID', index: 'id' },
     { title: '父级ID', index: 'parentId' },
     { title: '名称', index: 'name' },
+    { title: '名称的国际化', index: 'nameI18n' },
     { title: 'URL', index: 'url' },
     { title: '图标', index: 'icon' },
     { title: '类型', index: 'type', type: 'tag', tag: {} },

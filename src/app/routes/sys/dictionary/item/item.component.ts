@@ -98,6 +98,7 @@ export class SysDictionaryItemComponent implements OnInit {
     { title: '名称', index: 'name' },
     { title: 'KEY', index: 'key' },
     { title: '值', index: 'value' },
+    { title: '值的国际化', index: 'valueI18n' },
     { title: 'KEY类型', index: 'keyType', type: 'tag', tag: {} },
     { title: '值类型', index: 'valueType', type: 'tag', tag: {} },
     { title: '备注', index: 'remark' },

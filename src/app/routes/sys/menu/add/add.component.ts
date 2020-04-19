@@ -24,6 +24,7 @@ export class SysMenuAddComponent implements OnInit {
         },
       },
       name: { type: 'string', title: '名称' },
+      nameI18n: { type: 'string', title: '名称的国际化' },
       url: { type: 'string', title: 'URL' },
       icon: { type: 'string', title: '图标' },
       type: {
