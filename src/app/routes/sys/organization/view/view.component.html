@@ -1,13 +1,17 @@
 <div class="modal-header">
   <div class="modal-title">查看 {{ record.id }} 信息</div>
 </div>
-<nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<div sv-container *ngIf="i">
-  <sv label="姓名">{{ i.owner }}</sv>
-  <sv label="会员卡号">32943898021309809423</sv>
-  <sv label="身份证">3321944288191034921</sv>
-  <sv label="联系方式">18112345678</sv>
-  <sv label="联系地址">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</sv>
+<nz-spin *ngIf="!sysOrganization" class="modal-spin"></nz-spin>
+<div sv-container *ngIf="sysOrganization" col="1" labelWidth="150" >
+  <sv label="ID">{{ sysOrganization.id }}</sv>
+  <sv label="父级ID">{{ sysOrganization.parentId }}</sv>
+  <sv label="名称">{{ sysOrganization.name }}</sv>
+  <sv label="全称">{{ sysOrganization.fullName }}</sv>
+  <sv label="类型" ><nz-tag [nzColor]="sysOrganization.type.color">{{sysOrganization.type.text}}</nz-tag></sv>
+  <sv label="备注">{{sysOrganization.remark}}</sv>
+  <sv label="状态" ><nz-tag [nzColor]="sysOrganization.status.color">{{sysOrganization.status.text}}</nz-tag></sv>
+  <sv label="修改的日期时间">{{sysOrganization.updatedDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
+  <sv label="创建的日期时间">{{sysOrganization.createdDateTime | _date: 'YYYY年MM月DD日HH时mm分ss秒'}}</sv>
 </div>
 <div class="modal-footer">
   <button nz-button type="button" (click)="close()">关闭</button>
