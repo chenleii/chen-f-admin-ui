@@ -105,6 +105,7 @@ export class StartupService {
           childrenMapName: 'children',
           cb: (item: any) => {
             item.text = item.name;
+            item.i18n = item.nameI18n;
             item.group = item.type === 'GROUP';
             item.link = item.url;
             item.externalLink = item.type === 'EXTERNAL_LINK';
