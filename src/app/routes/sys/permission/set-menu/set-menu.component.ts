@@ -35,7 +35,7 @@ export class SysPermissionSetMenuComponent implements OnInit {
     zip(
       this.http.get(`/chen/admin/sys/menu/all/enabled`),
       this.http.get(`/chen/admin/online/sysMenuList`),
-      this.http.get(`/chen/admin/sys/menu/permission/enabled/${this.record.id}`),
+      this.http.get(`/chen/admin/sys/permission/menu/${this.record.id}`),
     ).subscribe(([sysMenuList, onlineSYsUserMenuList, sysPermissionMenuList]: any) => {
       this.sysMenuList = sysMenuList;
 

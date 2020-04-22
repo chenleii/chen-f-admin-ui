@@ -43,7 +43,7 @@ export class SysRoleSetPermissionComponent implements OnInit {
 
   ngOnInit(): void {
     zip(
-      this.http.get(`/chen/admin/sys/role/${this.record.id}/sysPermission`),
+      this.http.get(`/chen/admin/sys/role/permission/${this.record.id}`),
       this.http.get(`/chen/admin/online/sysUser`),
     ).subscribe(([sysRolePermissionList, onlineSysUser]: any[]) => {
 
