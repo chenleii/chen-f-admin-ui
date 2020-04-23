@@ -45,13 +45,13 @@ export class SysUserSetRoleComponent implements OnInit {
   ngOnInit(): void {
     zip(
       this.http.get(`/chen/admin/sys/user/${this.record.id}/sysRole`),
-      this.http.get(`/chen/admin/online/sysUser`),
-    ).subscribe(([sysUserRoleList, onlineSysUser]: any[]) => {
+      this.http.get(`/chen/admin/online/loginUser/sysRoleList`),
+    ).subscribe(([sysUserRoleList, sysRoleList]: any[]) => {
 
       const defaultSysUserRoleIdList = sysUserRoleList.map((value, index, array) => {
         return value.id;
       });
-      const sysRoleListEnum = onlineSysUser.sysUserRoleList.map((value, index, array) => {
+      const sysRoleListEnum = sysRoleList.map((value, index, array) => {
         return { title: value.name, value: value.id, disabled: value.status === 'DISABLED' };
       });
 

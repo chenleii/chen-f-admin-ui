@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { zip } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { MenuService, SettingsService, TitleService, ALAIN_I18N_TOKEN } from '@delon/theme';
+import { MenuService, SettingsService, TitleService, ALAIN_I18N_TOKEN, Menu } from '@delon/theme';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { ACLService } from '@delon/acl';
 import { TranslateService } from '@ngx-translate/core';
@@ -72,25 +72,24 @@ export class StartupService {
     zip(
       this.httpClient.get(`http://localhost:4200/assets/tmp/i18n/${this.i18n.defaultLang}.json`),
       this.httpClient.get('http://localhost:4200/assets/tmp/app-data.json'),
-      this.httpClient.get('/chen/admin/online/sysUser'),
-      this.httpClient.get('/chen/admin/online/sysMenuList'),
+      this.httpClient.get('/chen/admin/online/loginUser'),
     ).pipe(
       // 接收其他拦截器后产生的异常消息
-      catchError(([langData, appData, sysUserData, sysMenuData]) => {
+      catchError(([langData, appData, loginUser]) => {
         resolve(null);
-        return [langData, appData, sysUserData, sysMenuData];
+        return [langData, appData, loginUser];
       }),
-    ).subscribe(([langData, appData, sysUserData, sysMenuData]) => {
+    ).subscribe(([langData, appData, loginUser]) => {
 
         // 设置国际化
         this.translate.setTranslation(this.i18n.defaultLang, langData);
         this.translate.setDefaultLang(this.i18n.defaultLang);
 
         // 设置系统角色与权限
-        const sysRoles: string[] = sysUserData.sysUserRoleList.map((sysRole) => {
+        const sysRoles: string[] = loginUser.sysUserRoleList.map((sysRole) => {
           return sysRole.name;
         });
-        const sysPermissions: string[] = sysUserData.sysUserPermissionList.map((sysPermission) => {
+        const sysPermissions: string[] = loginUser.sysUserPermissionList.map((sysPermission) => {
           return sysPermission.name;
         });
         // ACL：设置权限为全量
@@ -99,7 +98,7 @@ export class StartupService {
         this.aclService.setAbility(sysPermissions);
 
         // 设置系统菜单
-        sysMenuData = this.arrayService.arrToTree(sysMenuData, {
+        const sysMenus: Menu[] = this.arrayService.arrToTree(loginUser.sysUserMenuList, {
           idMapName: 'id',
           parentIdMapName: 'parentId',
           childrenMapName: 'children',
@@ -107,12 +106,12 @@ export class StartupService {
             item.text = item.name;
             item.i18n = item.nameI18n;
             item.group = item.type === 'GROUP';
-            item.link = item.url;
-            item.externalLink = item.type === 'EXTERNAL_LINK';
+            item.link = item.type === 'LINK' ? item.url : null;
+            item.externalLink = item.type === 'EXTERNAL_LINK' ? item.url : null;
           },
         });
         this.menuService.clear();
-        this.menuService.add(sysMenuData);
+        this.menuService.add(sysMenus);
 
         // application data
         const res: any = appData;

@@ -43,7 +43,7 @@ export class SysRoleSetApiComponent implements OnInit {
 
   ngOnInit(): void {
     zip(
-      this.http.get(`/chen/admin/online/sysApiList`),
+      this.http.get(`/chen/admin/online/loginUser/sysApiList`),
       this.http.get(`/chen/admin/sys/role/api/${this.record.id}`),
     ).subscribe(([onlineSysUserApiList, sysRoleApiList]: any[]) => {
 

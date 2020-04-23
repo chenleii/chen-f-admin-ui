@@ -44,13 +44,13 @@ export class SysRoleSetPermissionComponent implements OnInit {
   ngOnInit(): void {
     zip(
       this.http.get(`/chen/admin/sys/role/permission/${this.record.id}`),
-      this.http.get(`/chen/admin/online/sysUser`),
-    ).subscribe(([sysRolePermissionList, onlineSysUser]: any[]) => {
+      this.http.get(`/chen/admin/online/loginUser/sysPermissionList`),
+    ).subscribe(([sysRolePermissionList, sysPermissionList]: any[]) => {
 
       const defaultSysRolePermissionIdList = sysRolePermissionList.map((value, index, array) => {
         return value.id;
       });
-      const sysPermissionListEnum = onlineSysUser.sysUserPermissionList.map((value, index, array) => {
+      const sysPermissionListEnum = sysPermissionList.map((value, index, array) => {
         return { title: value.name, value: value.id, disabled: value.status === 'DISABLED' };
       });
 

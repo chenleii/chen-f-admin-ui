@@ -33,7 +33,7 @@ export class SysRoleSetMenuComponent implements OnInit {
   ngOnInit(): void {
     zip(
       this.http.get(`/chen/admin/sys/menu/all/enabled`),
-      this.http.get(`/chen/admin/online/sysMenuList`),
+      this.http.get(`/chen/admin/online/loginUser/sysMenuList`),
       this.http.get(`/chen/admin/sys/role/menu/${this.record.id}`),
     ).subscribe(([sysMenuList, onlineSysUserMenuList, sysRoleMenuList]: any) => {
       this.sysMenuList = sysMenuList;
