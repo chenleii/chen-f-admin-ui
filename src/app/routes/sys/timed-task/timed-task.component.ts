@@ -63,13 +63,13 @@ export class SysTimedTaskComponent implements OnInit {
     params: this.params,
     reName: {
       pi: 'pageIndex',
-      ps: 'pageNumber',
+      ps: 'pageSize',
     },
   };
   res: STRes = {
     reName: {
       total: 'total',
-      list: 'records',
+      list: 'list',
     },
   };
   page: STPage = {
@@ -82,16 +82,16 @@ export class SysTimedTaskComponent implements OnInit {
     total: true,
   };
   columns: STColumn[] = [
-    { title: '编码', index: 'code' },
-    { title: '名称', index: 'name' },
-    { title: '类名', index: 'className' },
+    { title: '编码', index: 'code', sort: true },
+    { title: '名称', index: 'name', sort: true },
+    { title: '类名', index: 'className', sort: true },
     { title: 'CORN表达式', index: 'cronExpression' },
     { title: '数据', index: 'data' },
     { title: '类型', index: 'type', type: 'tag', tag: {} },
     { title: '备注', index: 'remark' },
     { title: '状态', index: 'status', type: 'tag', tag: {} },
-    { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
-    { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
+    // { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
+    // { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
     {
       title: '操作',
       buttons: [

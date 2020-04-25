@@ -61,13 +61,13 @@ export class SysUserComponent implements OnInit {
     params: this.params,
     reName: {
       pi: 'pageIndex',
-      ps: 'pageNumber',
+      ps: 'pageSize',
     },
   };
   res: STRes = {
     reName: {
       total: 'total',
-      list: 'records',
+      list: 'list',
     },
   };
   page: STPage = {
@@ -79,14 +79,14 @@ export class SysUserComponent implements OnInit {
     total: true,
   };
   columns: STColumn[] = [
-    { title: 'ID', index: 'id' },
-    { title: '用户名称', index: 'username' },
-    { title: '级别', index: 'level', type: 'tag', tag: {} },
+    { title: 'ID', index: 'id', sort: true },
+    { title: '用户名称', index: 'username', sort: true },
+    { title: '级别', index: 'level', type: 'tag', tag: {}, sort: true },
     { title: '最后登录时间', index: 'lastLoginDateTime', type: 'date', default: '未登录过' },
     { title: '描述', index: 'remark', width: '200px' },
     { title: '状态', index: 'status', type: 'tag', tag: {} },
-    { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
-    { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
+    // { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
+    // { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
     {
       title: '操作',
       buttons: [

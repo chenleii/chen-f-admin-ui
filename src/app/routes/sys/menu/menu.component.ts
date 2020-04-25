@@ -61,13 +61,13 @@ export class SysMenuComponent implements OnInit {
     params: this.params,
     reName: {
       pi: 'pageIndex',
-      ps: 'pageNumber',
+      ps: 'pageSize',
     },
   };
   res: STRes = {
     reName: {
       total: 'total',
-      list: 'records',
+      list: 'list',
     },
     process: (data: STData[]) => {
       // 转成树结构

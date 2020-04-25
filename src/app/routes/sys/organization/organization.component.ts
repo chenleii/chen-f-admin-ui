@@ -24,8 +24,8 @@ export class SysOrganizationComponent implements OnInit {
   params: any = {};
   searchSchema: SFSchema = {
     properties: {
-      name: {type: 'string', title: '名称'},
-      fullName: {type: 'string', title: '全称'},
+      name: { type: 'string', title: '名称' },
+      fullName: { type: 'string', title: '全称' },
       type: {
         type: 'string', title: '类型',
         enum: [],
@@ -46,8 +46,8 @@ export class SysOrganizationComponent implements OnInit {
         type: 'string', title: '备注',
         ui: {
           widget: 'textarea',
-          autosize: {minRows: 2, maxRows: 6}
-        }
+          autosize: { minRows: 2, maxRows: 6 },
+        },
       },
     },
     ui: {
@@ -67,13 +67,13 @@ export class SysOrganizationComponent implements OnInit {
     params: this.params,
     reName: {
       pi: 'pageIndex',
-      ps: 'pageNumber',
+      ps: 'pageSize',
     },
   };
   res: STRes = {
     reName: {
       total: 'total',
-      list: 'records',
+      list: 'list',
     },
     process: (data: STData[]) => {
       // 转成树结构
@@ -115,8 +115,8 @@ export class SysOrganizationComponent implements OnInit {
     {title: '类型', index: 'type', type: 'tag', tag: {}},
     {title: '备注', index: 'remark'},
     {title: '状态', index: 'status', type: 'tag', tag: {}},
-    { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
-    { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
+    // { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
+    // { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
     {
       title: '操作',
       buttons: [
@@ -167,11 +167,11 @@ export class SysOrganizationComponent implements OnInit {
 
   ngOnInit() {
     zip(
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/tag/SYS_ORGANIZATION.TYPE",
-        {mode: 'promise', type: 's', expire: 86400}),
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/tag/STATUS",
-        {mode: 'promise', type: 's', expire: 86400}),
-    ).subscribe(([typeTag, statusTag,]: any[]) => {
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/tag/SYS_ORGANIZATION.TYPE',
+        { mode: 'promise', type: 's', expire: 86400 }),
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/tag/STATUS',
+        { mode: 'promise', type: 's', expire: 86400 }),
+    ).subscribe(([typeTag, statusTag]: any[]) => {
 
       this.columns.forEach((value) => {
         if (value.index === 'type') {
@@ -186,11 +186,11 @@ export class SysOrganizationComponent implements OnInit {
     });
 
     zip(
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/select/SYS_ORGANIZATION.TYPE",
-        {mode: 'promise', type: 's', expire: 86400}),
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/select/STATUS",
-        {mode: 'promise', type: 's', expire: 86400}),
-    ).subscribe(([typeSelect, statusSelect,]: any) => {
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/select/SYS_ORGANIZATION.TYPE',
+        { mode: 'promise', type: 's', expire: 86400 }),
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/select/STATUS',
+        { mode: 'promise', type: 's', expire: 86400 }),
+    ).subscribe(([typeSelect, statusSelect]: any) => {
 
       this.searchSchema.properties.type.enum = typeSelect;
       this.searchSchema.properties.status.enum = statusSelect;

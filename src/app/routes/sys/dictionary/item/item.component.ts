@@ -73,13 +73,13 @@ export class SysDictionaryItemComponent implements OnInit {
     params: this.params,
     reName: {
       pi: 'pageIndex',
-      ps: 'pageNumber',
+      ps: 'pageSize',
     },
   };
   res: STRes = {
     reName: {
       total: 'total',
-      list: 'records',
+      list: 'list',
     },
   };
   page: STPage = {
@@ -93,18 +93,18 @@ export class SysDictionaryItemComponent implements OnInit {
   };
   @ViewChild('st', { static: true }) st: STComponent;
   columns: STColumn[] = [
-    { title: 'ID', index: 'id' },
-    { title: '编码', index: 'code' },
-    { title: '名称', index: 'name' },
-    { title: 'KEY', index: 'key' },
+    { title: 'ID', index: 'id', sort: true },
+    { title: '编码', index: 'code', sort: true },
+    { title: '名称', index: 'name', sort: true },
+    { title: 'KEY', index: 'key', sort: true },
     { title: '值', index: 'value' },
     { title: '值的国际化', index: 'valueI18n' },
     { title: 'KEY类型', index: 'keyType', type: 'tag', tag: {} },
     { title: '值类型', index: 'valueType', type: 'tag', tag: {} },
     { title: '备注', index: 'remark' },
     { title: '状态', index: 'status', type: 'tag', tag: {} },
-    { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
-    { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
+    // { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
+    // { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
     {
       title: '操作',
       buttons: [

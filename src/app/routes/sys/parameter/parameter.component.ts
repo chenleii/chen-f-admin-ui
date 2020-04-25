@@ -13,13 +13,13 @@ import { SysParameterEditComponent } from './edit/edit.component';
   templateUrl: './parameter.component.html',
 })
 export class SysParameterComponent implements OnInit {
-  @ViewChild('sf', { static: true })  sf: SFComponent;
+  @ViewChild('sf', { static: true }) sf: SFComponent;
   params: any = {};
   searchSchema: SFSchema = {
     properties: {
-      code: {type: 'string', title: '编码'},
-      name: {type: 'string', title: '名称'},
-      value: {type: 'string', title: "值",},
+      code: { type: 'string', title: '编码' },
+      name: { type: 'string', title: '名称' },
+      value: { type: 'string', title: '值' },
       valueType: {
         type: 'string', title: '值类型',
         enum: [],
@@ -48,8 +48,8 @@ export class SysParameterComponent implements OnInit {
         type: 'string', title: '备注',
         ui: {
           widget: 'textarea',
-          autosize: {minRows: 2, maxRows: 6}
-        }
+          autosize: { minRows: 2, maxRows: 6 },
+        },
       },
     },
     ui: {
@@ -57,25 +57,25 @@ export class SysParameterComponent implements OnInit {
       // spanControl: 14,
       grid: {
         span: 6,
-      }
-    }
+      },
+    },
   };
   ui: SFUISchema = {};
 
-  @ViewChild('st', { static: true })  st: STComponent;
+  @ViewChild('st', { static: true }) st: STComponent;
   url = `/chen/admin/sys/parameter`;
   req: STReq = {
     params: this.params,
     reName: {
       pi: 'pageIndex',
-      ps: 'pageNumber'
-    }
+      ps: 'pageSize',
+    },
   };
   res: STRes = {
     reName: {
       total: 'total',
-      list: 'records'
-    }
+      list: 'list',
+    },
   };
   page: STPage = {
     front: false,
@@ -83,48 +83,48 @@ export class SysParameterComponent implements OnInit {
     showSize: true,
     pageSizes: [10, 20, 30, 40, 50],
     showQuickJumper: true,
-    total: true
+    total: true,
   };
   columns: STColumn[] = [
-    {title: 'ID', index: 'id'},
-    {title: '编码', index: 'code'},
-    {title: '名称', index: 'name'},
-    {title: '值', index: 'value',},
-    {title: '值类型', index: 'valueType', type: 'tag', tag: {}},
-    {title: '类型', index: 'type', type: 'tag', tag: {}},
-    {title: '描述', index: 'remark',},
-    {title: '状态', index: 'status', type: 'tag', tag: {}},
-    {title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: "未修改过"},
-    {title: '创建的日期时间', index: 'createdDateTime', type: 'date'},
+    { title: 'ID', index: 'id', sort: true },
+    { title: '编码', index: 'code', sort: true },
+    { title: '名称', index: 'name', sort: true },
+    { title: '值', index: 'value', sort: true },
+    { title: '值类型', index: 'valueType', type: 'tag', tag: {} },
+    { title: '类型', index: 'type', type: 'tag', tag: {} },
+    { title: '描述', index: 'remark' },
+    { title: '状态', index: 'status', type: 'tag', tag: {} },
+    // { title: '修改的日期时间', index: 'updatedDateTime', type: 'date', default: '未修改过' },
+    // { title: '创建的日期时间', index: 'createdDateTime', type: 'date' },
     {
       title: '操作',
       buttons: [
         {
           text: '查看', type: 'none',
           click: (item: any, modal: any, instance: STComponent) => {
-            this.modal.create(SysParameterViewComponent, {'record': item}).subscribe();
-          }
+            this.modal.create(SysParameterViewComponent, { 'record': item }).subscribe();
+          },
         },
         {
           text: '编辑', type: 'none',
           click: (item: any, modal: any, instance: STComponent) => {
-            this.modal.create(SysParameterEditComponent, {'record': item}).subscribe(res => {
+            this.modal.create(SysParameterEditComponent, { 'record': item }).subscribe(res => {
                 // 刷新当前页
                 this.st.reload();
-              }
+              },
             );
-          }
+          },
         }, {
           text: '删除', type: 'del',
           click: (item: any, modal: any, instance: STComponent) => {
             this.http.delete('/chen/admin/sys/parameter/' + item.id).subscribe((res: any) => {
               // 刷新当前页
               this.st.reload();
-            })
-          }
-        }
-      ]
-    }
+            });
+          },
+        },
+      ],
+    },
   ];
 
 
@@ -134,13 +134,13 @@ export class SysParameterComponent implements OnInit {
 
   ngOnInit() {
     zip(
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/tag/VALUE_TYPE",
-        {mode: 'promise', type: 's', expire: 86400}),
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/tag/SYS_PARAMETER.TYPE",
-        {mode: 'promise', type: 's', expire: 86400}),
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/tag/STATUS",
-        {mode: 'promise', type: 's', expire: 86400}),
-    ).subscribe(([valueTypeTag, typeTag, statusTag,]: any[]) => {
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/tag/VALUE_TYPE',
+        { mode: 'promise', type: 's', expire: 86400 }),
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/tag/SYS_PARAMETER.TYPE',
+        { mode: 'promise', type: 's', expire: 86400 }),
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/tag/STATUS',
+        { mode: 'promise', type: 's', expire: 86400 }),
+    ).subscribe(([valueTypeTag, typeTag, statusTag]: any[]) => {
 
       this.columns.forEach((value) => {
         if (value.index === 'valueType') {
@@ -159,12 +159,12 @@ export class SysParameterComponent implements OnInit {
     });
 
     zip(
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/select/VALUE_TYPE",
-        {mode: 'promise', type: 's', expire: 86400}),
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/select/SYS_PARAMETER.TYPE",
-        {mode: 'promise', type: 's', expire: 86400}),
-      this.cacheService.get("/chen/common/sys/dictionary/item/alain/select/STATUS",
-        {mode: 'promise', type: 's', expire: 86400}),
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/select/VALUE_TYPE',
+        { mode: 'promise', type: 's', expire: 86400 }),
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/select/SYS_PARAMETER.TYPE',
+        { mode: 'promise', type: 's', expire: 86400 }),
+      this.cacheService.get('/chen/common/sys/dictionary/item/alain/select/STATUS',
+        { mode: 'promise', type: 's', expire: 86400 }),
     ).subscribe(([valueTypeSelect, typeSelect, statusSelect]: any) => {
 
       this.searchSchema.properties.valueType.enum = valueTypeSelect;
@@ -183,7 +183,7 @@ export class SysParameterComponent implements OnInit {
 
   add() {
     this.modal
-      .createStatic(SysParameterAddComponent, {i: {id: 0}})
+      .createStatic(SysParameterAddComponent, { i: { id: 0 } })
       .subscribe(() => this.st.reload());
   }
 
